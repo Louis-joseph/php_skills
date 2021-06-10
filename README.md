@@ -1,13 +1,16 @@
 <h1>HeLLO🤖</h1>
 <p>You can find the projects.<br>
-</p>
+
 
 1. CRUD 📦
 
 <ul>
-<li>Select</li>
-<li>Delete</li>
-<li>Update</li>
-<li>Insert</li>
+  <li>Create <mark> Insert </mark> -> Insertion en base</li>
+  <li>Read <mark> Select </mark> -> Lire de la donnée</li>
+  <li>Update -> Modifier/Mettre à jour de la donnée</li>
+  <li>Delete ->Supprimer de la donnée</li>
 </ul>
+
+</p>
+  
 
