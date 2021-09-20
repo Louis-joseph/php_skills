@@ -5,10 +5,22 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PostRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
- * @ApiResource()
+ * @ApiResource(
+ *     normalizationContext={"groups"={"read:collection"}},
+ *     itemOperations={
+ *      "put" = {
+ *      "denormalization_context" = {"groups"={"put:Post"}}
+ *      },
+ *      "delete",
+ *      "get" = { 
+ *      "normalization_context" = {"groups"={"read:collection", "read:item", "read:Post"}}
+ *          }
+ *      }
+ * )
  */
 class Post
 {
@@ -20,32 +32,39 @@ class Post
     private $id;
 
     /**
+     * @Groups({"read:collection", "put:Post"})
      * @ORM\Column(type="string", length=255)
      */
+
     private $title;
 
     /**
+     * @Groups({"read:collection"})
      * @ORM\Column(type="string", length=255)
      */
     private $slug;
 
     /**
+     * @Groups({"read:collection"})
      * @ORM\Column(type="text")
      */
     private $content;
 
     /**
+     * @Groups({"read:item"})
      * @ORM\Column(type="datetime_immutable")
      */
     private $createdAt;
 
     /**
+     * @Groups({"read:item"})
      * @ORM\Column(type="datetime_immutable")
      */
     private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="posts")
+     * @Groups({"read:item"})
      */
     private $category;
 
